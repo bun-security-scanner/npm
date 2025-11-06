@@ -91,20 +91,6 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Run semantic-release
-        if: github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
-
-      - name: Publish to npm with provenance
-        # Manual publish with provenance for initial release (until OIDC bootstrap complete)
-        # Runs on workflow_dispatch to publish existing version, or after semantic-release on push
-        if: github.event_name == 'workflow_dispatch' || success()
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          # Configure npm to use the token
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-
-          # Publish with provenance (OIDC attestation)
-          npm publish --provenance --access public
