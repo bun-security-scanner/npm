@@ -1,0 +1,53 @@
+{
+	"name": "@bun-security-scanner/npm",
+	"version": "1.0.1",
+	"description": "Security scanner for Bun projects integrating with npm audit and GitHub Advisory Database",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"module": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"files": ["src", "README.md", "LICENSE"],
+	"scripts": {
+		"dev": "bun --watch run src/cli.ts",
+		"build": "bun run lint && bun run typecheck && bun test",
+		"test": "bun test",
+		"lint": "bunx @biomejs/biome check .",
+		"typecheck": "bunx tsc --noEmit"
+	},
+	"keywords": [
+		"bun",
+		"security",
+		"scanner",
+		"npm-audit",
+		"vulnerability",
+		"github-advisory-database"
+	],
+	"author": "maloma7",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bun-security-scanner/npm"
+	},
+	"bugs": {
+		"url": "https://github.com/bun-security-scanner/npm/issues"
+	},
+	"homepage": "https://audit.bun-security-scanner.com",
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.0.0",
+		"@types/bun": "latest",
+		"lefthook": "^1.10.4"
+	},
+	"dependencies": {
+		"zod": "^3.24.1"
+	},
+	"peerDependencies": {
+		"bun-types": "latest"
+	},
+	"engines": {
+		"bun": ">=1.0.0"
+	}
+}
